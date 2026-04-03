@@ -1,89 +1,27 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpeakReal Mastery - Tiếng Anh Thực Chiến</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <meta charset="UTF-8">
+  <title>SpeakReal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-[#FFFBF7] font-sans text-slate-900 pb-20">
 
-    <header class="bg-gradient-to-br from-orange-500 via-orange-600 to-amber-700 text-white pt-12 pb-32 px-4 relative overflow-hidden text-center">
-        <div class="absolute -top-10 -left-10 w-64 h-64 bg-white/10 blur-3xl rounded-full"></div>
-        <div class="max-w-4xl mx-auto relative z-10">
-            <div id="logo-container" class="mb-4 scale-125 inline-block drop-shadow-2xl">
-                <!-- SVG Logo will be injected here -->
-            </div>
-            <h1 class="text-6xl font-black tracking-tighter uppercase italic drop-shadow-lg leading-tight">
-                Speak<span class="text-yellow-300">Real</span>
-            </h1>
-            <p class="text-sm font-black text-white/70 uppercase tracking-[0.4em] -mt-1 drop-shadow-md">
-                Real talk translator
-            </p>
-            <div class="h-0.5 w-16 bg-white/20 mx-auto mt-8 mb-8 rounded-full"></div>
-            <p class="text-lg md:text-xl font-bold text-orange-50 uppercase tracking-widest italic opacity-95">
-                Tiếng Anh thực chiến - Giao tiếp ổn liền
-            </p>
-            
-            <div class="flex bg-black/10 p-1.5 rounded-full mt-12 backdrop-blur-sm border border-white/10 inline-flex shadow-xl">
-                <button id="btn-tab-translate" class="px-12 py-3 rounded-full font-black uppercase text-[10px] tracking-[0.2em] transition-all bg-white text-orange-700 shadow-lg">Dịch Thuật</button>
-                <button id="btn-tab-study" class="px-12 py-3 rounded-full font-black uppercase text-[10px] tracking-[0.2em] transition-all text-white/60 hover:text-white">Sổ Tay</button>
-            </div>
-        </div>
-    </header>
+<body class="bg-orange-50 flex flex-col items-center justify-center min-h-screen p-6">
 
-    <main class="max-w-4xl mx-auto -mt-20 px-4 space-y-8 relative z-10">
-        <!-- Translate Section -->
-        <section id="section-translate" class="space-y-8">
-            <div class="bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-8 space-y-6 border border-orange-50 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-400 via-amber-500 to-orange-600"></div>
-                <div class="relative">
-                    <textarea id="input-text" 
-                        class="w-full p-8 pt-12 rounded-3xl bg-orange-50/20 border-2 border-transparent focus:border-orange-100 transition-all text-2xl font-bold h-48 resize-none shadow-inner outline-none placeholder-orange-200" 
-                        placeholder="Mày muốn nói gì bằng tiếng Việt?">chán quá đi uống vài chai mày</textarea>
-                    <button id="btn-mic" class="absolute top-6 right-6 p-4 rounded-2xl bg-white text-orange-400 shadow-md hover:text-orange-500 transition-all">
-                        <i data-lucide="mic" size="20"></i>
-                    </button>
-                </div>
-                <button id="btn-submit" class="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-slate-200 text-white font-black py-7 rounded-3xl transition-all shadow-xl flex items-center justify-center gap-4 text-xl uppercase tracking-[0.1em] border-b-4 border-orange-700 active:translate-y-1 active:border-b-0 group">
-                    <i data-lucide="zap" class="text-yellow-200 group-hover:animate-bounce"></i> 
-                    <span>Xuất Chiêu!</span>
-                </button>
-            </div>
+  <h1 class="text-4xl font-black mb-6">🔥 SpeakReal</h1>
 
-            <div id="results-container" class="space-y-8 hidden">
-                <!-- Results will be injected here -->
-            </div>
-        </section>
+  <textarea id="input"
+    class="w-full max-w-xl p-4 rounded-xl border text-lg"
+    placeholder="Nhập tiếng Việt..."></textarea>
 
-        <!-- Study Section -->
-        <section id="section-study" class="hidden">
-            <div class="bg-white rounded-[2.5rem] shadow-xl p-16 text-center border border-orange-50">
-                <div class="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-6 text-orange-500 shadow-inner">
-                   <i data-lucide="book-open" size="40"></i>
-                </div>
-                <h2 class="text-3xl font-black text-slate-800 uppercase italic tracking-tighter">Sổ tay của mày</h2>
-                <div id="notebook-list" class="mt-12 space-y-4 text-left">
-                    <!-- Notebook items here -->
-                </div>
-            </div>
-        </section>
-    </main>
+  <button id="btn"
+    class="mt-4 px-6 py-3 bg-orange-500 text-white rounded-xl font-bold">
+    Xuất Chiêu
+  </button>
 
-    <footer class="mt-24 text-center pb-12 px-4">
-        <div class="h-px w-24 bg-slate-200 mx-auto mb-8 rounded-full"></div>
-        <div class="opacity-60 font-black text-[10px] uppercase tracking-[0.3em] text-slate-400 space-y-2">
-            <p>© 2026 SpeakReal — v0.1.7 · Crafted by Tèo Miền Tây</p>
-        </div>
-    </footer>
+  <pre id="output"
+    class="mt-6 w-full max-w-xl bg-black text-green-400 p-4 rounded-xl whitespace-pre-wrap"></pre>
 
-    <!-- Firebase SDK Compat -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
