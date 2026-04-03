@@ -1,0 +1,44 @@
+/* Custom Animations and Styles */
+@keyframes superGlow {
+    0% { filter: drop-shadow(0 0 5px rgba(253, 224, 71, 0.4)); }
+    50% { filter: drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)); }
+    100% { filter: drop-shadow(0 0 5px rgba(253, 224, 71, 0.4)); }
+}
+
+.electric-bolt {
+    animation: superGlow 2s infinite ease-in-out;
+}
+
+/* Custom selection styling */
+::selection {
+    background: #fed7aa;
+    color: #9a3412;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #fffbf7;
+}
+::-webkit-scrollbar-thumb {
+    background: #fdba74;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #f97316;
+}
+
+.bold-tag {
+    color: #431407;
+    text-decoration: underline;
+    text-decoration-color: rgba(251, 146, 60, 0.5);
+    text-decoration-thickness: 4px;
+    text-underline-offset: 4px;
+    font-weight: 900;
+    background-color: rgba(255, 237, 213, 0.5);
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    border-radius: 0.125rem;
+}
