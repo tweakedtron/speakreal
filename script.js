@@ -1,4 +1,4 @@
-const apiKey = "AIzaSyDO6ZVI4nHZBTZRUoAp0U6JDlVpnEFsqSg"; // 👈 thay bằng key của m
+const apiKey = AIzaSyDO6ZVI4nHZBTZRUoAp0U6JDlVpnEFsqSg; // 👈 thay bằng key của m
 
 const btnSubmit = document.getElementById("btn-submit");
 const inputText = document.getElementById("input-text");
