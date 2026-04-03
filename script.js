@@ -1,5 +1,5 @@
 // ===== CONFIG =====
-const apiKey = "DÁN_API_KEY_VÀO_ĐÂY"; // 👈 key m
+const apiKey = "AIzaSyDO6ZVI4nHZBTZRUoAp0U6JDlVpnEFsqSg"; // 👈 key m
 
 // ===== ELEMENTS =====
 const btnSubmit = document.getElementById("btn-submit");
