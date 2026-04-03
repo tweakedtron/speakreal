@@ -1,5 +1,5 @@
 // ===== CONFIG =====
-const apiKey = "AIzaSyDO6ZVI4nHZBTZRUoAp0U6JDlVpnEFsqSg"; // 👈 thay key của m
+const apiKey = "DÁN_API_KEY_VÀO_ĐÂY"; // 👈 key m
 
 // ===== ELEMENTS =====
 const btnSubmit = document.getElementById("btn-submit");
@@ -46,7 +46,12 @@ Yêu cầu:
 - Có grammar đơn giản
 - Có tips
 
-Trả về JSON dạng:
+⚠️ QUAN TRỌNG:
+- Trả về JSON thuần
+- KHÔNG markdown
+- KHÔNG dùng \`\`\`
+
+Format:
 
 {
   "versions": [
@@ -68,20 +73,36 @@ Trả về JSON dạng:
     );
 
     const data = await response.json();
-    console.log("API response:", data);
+    console.log("API:", data);
 
-    // ❌ API lỗi
     if (!data.candidates) {
-      throw new Error(JSON.stringify(data, null, 2));
+      throw new Error("API lỗi: " + JSON.stringify(data, null, 2));
     }
 
-    const rawText = data.candidates[0].content.parts[0].text;
+    // ===== LẤY TEXT =====
+    let rawText = data.candidates[0].content.parts[0].text;
 
+    // 🔥 CLEAN markdown (QUAN TRỌNG)
+    rawText = rawText
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+    // ===== PARSE =====
     let parsed;
     try {
       parsed = JSON.parse(rawText);
-    } catch {
-      throw new Error("Model trả về không phải JSON:\n" + rawText);
+    } catch (e) {
+      console.error("Parse fail:", rawText);
+
+      resultsContainer.classList.remove("hidden");
+      resultsContainer.innerHTML = `
+        <div style="color:red">
+          JSON lỗi rồi m ơi:<br/>
+          <pre>${rawText}</pre>
+        </div>
+      `;
+      return;
     }
 
     // ===== RENDER =====
@@ -90,10 +111,10 @@ Trả về JSON dạng:
     parsed.versions.forEach((v) => {
       const div = document.createElement("div");
 
-      div.className = "bg-white p-6 rounded-xl shadow mb-4";
+      div.className = "bg-white p-6 rounded-2xl shadow mb-6";
 
       div.innerHTML = `
-        <h3 class="font-bold text-lg mb-2">${v.type}</h3>
+        <h3 class="font-black text-lg mb-2">${v.type}</h3>
         <p><b>English:</b> ${formatBold(v.english)}</p>
         <p><b>Grammar:</b> ${formatBold(v.grammar)}</p>
         <p><b>Tips:</b> ${v.tips}</p>
@@ -107,7 +128,7 @@ Trả về JSON dạng:
 
     resultsContainer.classList.remove("hidden");
     resultsContainer.innerHTML = `
-      <div class="text-red-500">
+      <div style="color:red">
         Toang rồi:<br/>
         <pre>${err.message}</pre>
       </div>
