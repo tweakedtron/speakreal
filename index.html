@@ -3,177 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sửa Lỗi SPEAKREAL - Tèo Miền Tây</title>
+    <title>SpeakReal Mastery - Tiếng Anh Thực Chiến</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
-        body {
-            font-family: 'Itim', cursive;
-            background-color: #1a1a1a;
-            color: #fff;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-        }
-        .btn-gong {
-            background: #8b4513;
-            transition: all 0.3s ease;
-        }
-        .btn-gong:hover {
-            background: #a0522d;
-            transform: scale(1.02);
-        }
-        .status-dot {
-            height: 10px;
-            width: 10px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
+<body class="bg-[#FFFBF7] font-sans text-slate-900 pb-20">
 
-    <div class="max-w-md w-full glass-card p-8 shadow-2xl">
-        <h1 class="text-3xl text-center mb-6 text-orange-400">Sửa Lỗi API Cho Mày!</h1>
-        
-        <div class="mb-4">
-            <p class="text-gray-300 text-sm mb-2">Trạng thái kết nối:</p>
-            <div id="status-box" class="flex items-center gap-2 bg-black/30 p-3 rounded-lg">
-                <span id="api-indicator" class="status-dot bg-gray-500"></span>
-                <span id="api-text" class="text-sm">Chưa có chìa khóa...</span>
+    <header class="bg-gradient-to-br from-orange-500 via-orange-600 to-amber-700 text-white pt-12 pb-32 px-4 relative overflow-hidden text-center">
+        <div class="absolute -top-10 -left-10 w-64 h-64 bg-white/10 blur-3xl rounded-full"></div>
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div id="logo-container" class="mb-4 scale-125 inline-block drop-shadow-2xl">
+                <!-- SVG Logo will be injected here -->
             </div>
-        </div>
-
-        <div class="space-y-4">
-            <div>
-                <label class="block text-xs text-gray-400 mb-1">Dán Gemini API Key vô đây (Tao sẽ tự lưu):</label>
-                <div class="flex gap-2">
-                    <input type="password" id="api-key-input" 
-                        class="flex-1 bg-gray-800 border border-gray-700 rounded-lg p-2 text-sm focus:outline-none focus:border-orange-500"
-                        placeholder="AIzaSy...">
-                    <button id="save-key-btn" class="bg-blue-600 px-3 rounded-lg text-xs hover:bg-blue-500">Lưu</button>
-                </div>
-                <p class="text-[10px] text-gray-500 mt-1">* Đừng đẩy Key trực tiếp lên GitHub, coi chừng bị nó khóa á!</p>
-            </div>
-
-            <div class="bg-gray-800/50 p-4 rounded-xl italic text-gray-300 text-center border-l-4 border-orange-500">
-                "Chán quá đi uống vài chai mày"
-            </div>
-
-            <button id="action-btn" class="w-full btn-gong py-4 rounded-xl text-xl font-bold uppercase tracking-widest">
-                Đang Gồng...
-            </button>
-        </div>
-
-        <div id="response-area" class="mt-6 p-4 bg-orange-900/20 border border-orange-500/30 rounded-xl hidden">
-            <p class="text-orange-300 font-bold mb-1 text-sm">Tèo phản hồi:</p>
-            <div id="bot-text" class="text-white text-sm leading-relaxed"></div>
-        </div>
-
-        <footer class="mt-8 text-center text-[10px] text-gray-600 uppercase tracking-tighter">
-            © 2026 SPEAKREAL — V0.1.4 · CRAFTED BY TEO MIEN TAY
-        </footer>
-    </div>
-
-    <script>
-        const apiKeyInput = document.getElementById('api-key-input');
-        const saveKeyBtn = document.getElementById('save-key-btn');
-        const actionBtn = document.getElementById('action-btn');
-        const botText = document.getElementById('bot-text');
-        const responseArea = document.getElementById('response-area');
-        const apiIndicator = document.getElementById('api-indicator');
-        const apiText = document.getElementById('api-text');
-
-        // 1. Kiểm tra xem trong máy có lưu Key chưa
-        const savedKey = localStorage.getItem('gemini_api_key');
-        if (savedKey) {
-            apiKeyInput.value = savedKey;
-            apiIndicator.className = "status-dot bg-yellow-500";
-            apiText.innerText = "Đã nhận Key từ bộ nhớ!";
-        }
-
-        // 2. Hàm lưu Key vào trình duyệt
-        saveKeyBtn.addEventListener('click', () => {
-            const val = apiKeyInput.value.trim();
-            if (val) {
-                localStorage.setItem('gemini_api_key', val);
-                apiIndicator.className = "status-dot bg-green-500";
-                apiText.innerText = "Đã lưu Key thành công!";
-                setTimeout(() => { apiText.innerText = "Sẵn sàng gồng!"; }, 2000);
-            }
-        });
-
-        // 3. Hàm gọi API với cơ chế Exponential Backoff
-        async function callGemini(prompt, key, retries = 5, delay = 1000) {
-            // Sử dụng model ổn định nhất
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${key}`;
+            <h1 class="text-6xl font-black tracking-tighter uppercase italic drop-shadow-lg leading-tight">
+                Speak<span class="text-yellow-300">Real</span>
+            </h1>
+            <p class="text-sm font-black text-white/70 uppercase tracking-[0.4em] -mt-1 drop-shadow-md">
+                Real talk translator
+            </p>
+            <div class="h-0.5 w-16 bg-white/20 mx-auto mt-8 mb-8 rounded-full"></div>
+            <p class="text-lg md:text-xl font-bold text-orange-50 uppercase tracking-widest italic opacity-95">
+                Tiếng Anh thực chiến - Giao tiếp ổn liền
+            </p>
             
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: "Mày tên là Tèo, một thằng bạn thân miền Tây chính hiệu. Nói chuyện dân dã, chân chất, xưng tao mày. Hay rủ đi nhậu, đi câu cá." }] }
-            };
+            <div class="flex bg-black/10 p-1.5 rounded-full mt-12 backdrop-blur-sm border border-white/10 inline-flex shadow-xl">
+                <button id="btn-tab-translate" class="px-12 py-3 rounded-full font-black uppercase text-[10px] tracking-[0.2em] transition-all bg-white text-orange-700 shadow-lg">Dịch Thuật</button>
+                <button id="btn-tab-study" class="px-12 py-3 rounded-full font-black uppercase text-[10px] tracking-[0.2em] transition-all text-white/60 hover:text-white">Sổ Tay</button>
+            </div>
+        </div>
+    </header>
 
-            for (let i = 0; i < retries; i++) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+    <main class="max-w-4xl mx-auto -mt-20 px-4 space-y-8 relative z-10">
+        <!-- Translate Section -->
+        <section id="section-translate" class="space-y-8">
+            <div class="bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-8 space-y-6 border border-orange-50 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-400 via-amber-500 to-orange-600"></div>
+                <div class="relative">
+                    <textarea id="input-text" 
+                        class="w-full p-8 pt-12 rounded-3xl bg-orange-50/20 border-2 border-transparent focus:border-orange-100 transition-all text-2xl font-bold h-48 resize-none shadow-inner outline-none placeholder-orange-200" 
+                        placeholder="Mày muốn nói gì bằng tiếng Việt?"></textarea>
+                    <button id="btn-mic" class="absolute top-6 right-6 p-4 rounded-2xl bg-white text-orange-400 shadow-md hover:text-orange-500 transition-all">
+                        <i data-lucide="mic" size="20"></i>
+                    </button>
+                </div>
+                <button id="btn-submit" class="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-slate-200 text-white font-black py-7 rounded-3xl transition-all shadow-xl flex items-center justify-center gap-4 text-xl uppercase tracking-[0.1em] border-b-4 border-orange-700 active:translate-y-1 active:border-b-0 group">
+                    <i data-lucide="zap" class="text-yellow-200 group-hover:animate-bounce"></i> 
+                    <span>Xuất Chiêu!</span>
+                </button>
+            </div>
 
-                    if (response.ok) {
-                        const data = await response.json();
-                        return data.candidates?.[0]?.content?.parts?.[0]?.text;
-                    }
+            <div id="results-container" class="space-y-8 hidden">
+                <!-- Results will be injected here -->
+            </div>
+        </section>
 
-                    if (response.status === 429 || response.status >= 500) {
-                        await new Promise(res => setTimeout(res, delay));
-                        delay *= 2;
-                        continue;
-                    }
-                    
-                    const errData = await response.json();
-                    throw new Error(errData.error?.message || 'Lỗi hệ thống rồi!');
-                } catch (err) {
-                    if (i === retries - 1) throw err;
-                }
-            }
-        }
+        <!-- Study Section -->
+        <section id="section-study" class="hidden">
+            <div class="bg-white rounded-[2.5rem] shadow-xl p-16 text-center border border-orange-50">
+                <div class="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-6 text-orange-500 shadow-inner">
+                   <i data-lucide="book-open" size="40"></i>
+                </div>
+                <h2 class="text-3xl font-black text-slate-800 uppercase italic tracking-tighter">Sổ tay của mày</h2>
+                <div id="notebook-list" class="mt-12 space-y-4 text-left">
+                    <!-- Notebook items here -->
+                </div>
+            </div>
+        </section>
+    </main>
 
-        actionBtn.addEventListener('click', async () => {
-            const key = apiKeyInput.value.trim();
-            const prompt = "Chán quá đi uống vài chai mày";
+    <footer class="mt-24 text-center pb-12 px-4">
+        <div class="h-px w-24 bg-slate-200 mx-auto mb-8 rounded-full"></div>
+        <div class="opacity-60 font-black text-[10px] uppercase tracking-[0.3em] text-slate-400 space-y-2">
+            <p>© 2026 SpeakReal — v0.1.2 · Crafted by nhantrg.quach</p>
+        </div>
+    </footer>
 
-            if (!key) {
-                apiIndicator.className = "status-dot bg-red-500";
-                apiText.innerText = "Thiếu Key rồi cha nội!";
-                return;
-            }
-
-            actionBtn.innerText = "Đang gồng dữ lắm...";
-            actionBtn.disabled = true;
-            responseArea.classList.add('hidden');
-
-            try {
-                const result = await callGemini(prompt, key);
-                botText.innerText = result;
-                responseArea.classList.remove('hidden');
-                apiIndicator.className = "status-dot bg-green-500";
-                apiText.innerText = "Kết nối ngon lành!";
-            } catch (error) {
-                apiIndicator.className = "status-dot bg-red-500";
-                apiText.innerText = "Key bị lỗi hoặc hết hạn!";
-                console.error(error);
-                botText.innerText = "Lỗi rồi: " + error.message;
-                responseArea.classList.remove('hidden');
-            } finally {
-                actionBtn.innerText = "Đang Gồng...";
-                actionBtn.disabled = false;
-            }
-        });
-    </script>
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore-compat.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
